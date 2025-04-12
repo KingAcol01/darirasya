@@ -1,2 +1,1 @@
-# darirasya
-Untuk siapapun 
+
