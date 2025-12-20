@@ -1,385 +1,123 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Maafin Aku</title>
-  <style>
-    body {
-      margin: 0;
-      background: radial-gradient(circle, rgba(0, 0, 0, 0.9), rgba(46, 1, 34, 0.8), rgba(0, 0, 0, 0.9));
-      font-family: 'Segoe UI', sans-serif;
-      color: #fff;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      background-size: 400% 400%;
-      animation: backgroundAnimation 15s ease infinite;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untukmu Sayang ❤️</title>
+    <style>
+        /* CSS UNTUK TAMPILAN ROMANTIS */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffebee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            text-align: center;
+        }
 
-    @keyframes backgroundAnimation {
-      0% { background-position: 100% 100%; }
-      50% { background-position: 0% 0%; }
-      100% { background-position: 100% 100%; }
-    }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(255, 182, 193, 0.5);
+            border: 2px solid #ffc1e3;
+            z-index: 1;
+        }
 
-    .container {
-      position: relative;
-      max-width: 600px;
-      padding: 30px;
-      border-radius: 15px;
-      text-align: center;
-      background: rgba(255, 255, 255, 0.1);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
-      overflow: hidden;
-      animation: fadeInContainer 2s ease-out;
-    }
+        h1 { color: #d81b60; }
+        p { color: #ad1457; font-size: 1.1rem; }
 
-    @keyframes fadeInContainer {
-      0% { opacity: 0; transform: scale(0.8); }
-      100% { opacity: 1; transform: scale(1); }
-    }
+        button {
+            background-color: #ff4081;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            margin-top: 20px;
+            font-weight: bold;
+        }
 
-    .animated-text {
-      font-size: 2em;
-      white-space: nowrap;
-      border-right: 3px solid #ff4d6d;
-      width: 0;
-      margin: 20px auto;
-      background: linear-gradient(90deg, #ff7aa2, #ff4d6d);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: typing 3.5s steps(30, end) forwards, blink 0.7s step-end infinite, pulse 2s ease-in-out infinite;
-    }
+        button:hover {
+            background-color: #f50057;
+            transform: scale(1.1);
+        }
 
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
-    }
+        /* CSS UNTUK JUMPSCARE (Awalnya Tersembunyi) */
+        #jumpscare-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
 
-    @keyframes blink {
-      50% { border-color: transparent }
-    }
+        #ghost-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-    }
+        .shake {
+            animation: shake-animation 0.1s infinite;
+        }
 
-    .img-wrapper {
-      position: relative;
-      display: inline-block;
-    }
-
-    .main-img {
-      max-width: 300px;
-      width: 100%;
-      border-radius: 12px;
-      margin-top: 20px;
-      animation: fadeIn 1s ease-out;
-    }
-
-    .image-text {
-      position: absolute;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 1.5em;
-      color: #ff4d6d;
-      font-weight: bold;
-      background: rgba(255, 255, 255, 0.7);
-      padding: 5px 15px;
-      border-radius: 10px;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .choice-container {
-      display: flex;
-      justify-content: space-around;
-      margin-top: 30px;
-      animation: fadeInChoices 1s ease-out;
-    }
-
-    @keyframes fadeInChoices {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .choice {
-      background-color: #ff7aa2;
-      padding: 12px 25px;
-      border-radius: 10px;
-      font-weight: bold;
-      cursor: pointer;
-      border: none;
-      transition: transform 0.2s, background-color 0.3s;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    }
-
-    .choice:hover {
-      background-color: #ff4d6d;
-      transform: scale(1.1);
-    }
-
-    .center {
-      justify-content: center !important;
-    }
-
-    .popup {
-      position: relative;
-      margin-top: 20px;
-      background-color: #fff0f5;
-      color: #d6336c;
-      padding: 15px 20px;
-      border-radius: 12px;
-      font-size: 1.4em;
-      font-weight: bold;
-      display: none;
-      animation: popupFadeIn 1s ease-out;
-    }
-
-    @keyframes popupFadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .emoji {
-      font-size: 2.5em;
-      display: none;
-      margin-top: 10px;
-      animation: fadeInEmoji 1s ease-out;
-    }
-
-    @keyframes fadeInEmoji {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    #finalSection {
-      display: none;
-      margin-top: 30px;
-      text-align: center;
-    }
-
-    #copySection {
-      display: none;
-      margin-top: 20px;
-    }
-
-    .particle {
-      position: absolute;
-      background-color: #ff7aa2;
-      border-radius: 50%;
-      animation: particleAnimation 2s ease-in-out infinite;
-    }
-
-    @keyframes particleAnimation {
-      0% { transform: scale(0.5); opacity: 1; }
-      50% { transform: scale(1.5); opacity: 0.7; }
-      100% { transform: scale(0.5); opacity: 1; }
-    }
-
-    .particle:nth-child(1) { top: 10%; left: 10%; width: 10px; height: 10px; animation-delay: 0s; }
-    .particle:nth-child(2) { top: 20%; left: 80%; width: 15px; height: 15px; animation-delay: 0.5s; }
-    .particle:nth-child(3) { top: 80%; left: 30%; width: 12px; height: 12px; animation-delay: 1s; }
-
-    .love-container {
-      position: absolute;
-      top: 10%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 2.5em;
-      animation: loveAnimation 2s ease-in-out infinite;
-    }
-
-    @keyframes loveAnimation {
-      0% { transform: translateX(-50%) scale(1); }
-      50% { transform: translateX(-50%) scale(1.2); }
-      100% { transform: translateX(-50%) scale(1); }
-    }
-
-    .heart {
-      color: #ff7aa2;
-      animation: heartPulse 1.5s ease-in-out infinite;
-    }
-
-    @keyframes heartPulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.3); }
-    }
-
-    .balloon-container {
-      position: absolute;
-      top: 0;
-      left: -40px;
-      right: -40px;  /* Menambahkan kanan */
-      width: 30px;
-      height: 100%;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
-    .balloon-container.right {
-      left: unset;
-      right: -40px; /* Menambahkan balon ke sisi kanan */
-    }
-
-    .balloon {
-      position: absolute;
-      left: 0;
-      font-size: 24px;
-      animation: floatUp 4s linear forwards;
-      user-select: none;
-    }
-
-    .balloon.right {
-      right: 0;
-      left: unset; /* Membuat balon mengapung dari sisi kanan */
-    }
-
-    @keyframes floatUp {
-      0% { transform: translateY(100%); opacity: 1; }
-      100% { transform: translateY(-150%); opacity: 0; }
-    }
-
-    @media (max-width: 600px) {
-      .animated-text { font-size: 1.4em; }
-      .choice { padding: 10px 18px; }
-    }
-  </style>
+        @keyframes shake-animation {
+            0% { transform: translate(2px, 1px) rotate(0deg); }
+            20% { transform: translate(-3px, -2px) rotate(-1deg); }
+            40% { transform: translate(-1px, -1px) rotate(1deg); }
+            60% { transform: translate(3px, 2px) rotate(0deg); }
+            80% { transform: translate(1px, -1px) rotate(-1deg); }
+            100% { transform: translate(-1px, 2px) rotate(0deg); }
+        }
+    </style>
 </head>
 <body>
-  <audio id="clickSound" src="https://www.myinstants.com/media/sounds/mouse-click.mp3"></audio>
-  <audio id="cheerSound" src="https://www.myinstants.com/media/sounds/kids-cheering.mp3"></audio>
-  <audio id="dramaticMusic" src="https://www.myinstants.com/media/sounds/dramatic-music.mp3" loop></audio>
 
-  <div class="love-container">
-    <span class="heart">💖💖💖</span>
-  </div>
-
-  <div class="container">
-    <div class="animated-text">maafin aku ya udah bohongin kamu</div>
-
-    <div class="img-wrapper">
-      <img src="https://i.imgur.com/GdBYJIA.png" alt="Chibi Sedih" class="main-img">
-      <div class="image-text">SORRY PLISS</div>
-      <div class="balloon-container" id="balloon-container"></div>
-      <div class="balloon-container right" id="balloon-container-right"></div>
+    <div class="container">
+        <h1>❤️ Untuk Seseorang yang Spesial ❤️</h1>
+        <p>Aku punya sesuatu yang ingin aku katakan padamu...</p>
+        <p>Silakan klik tombol di bawah untuk melihat pesan rahasianya.</p>
+        <button onclick="startScare()">Klik untuk Pesan Cinta 💌</button>
     </div>
 
-    <div class="choice-container" id="choice-container">
-      <button class="choice" id="yes">Iya</button>
-      <button class="choice" id="no">Tidak</button>
+    <div id="jumpscare-container">
+        <audio id="scream-sound">
+            <source src="https://www.soundjay.com/human/sounds/person-screaming-01.mp3" type="audio/mpeg">
+        </audio>
+        <img id="ghost-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6A7t7Y9C-Y_t8oHq005j8vGkYv-12yT0pRA&s" alt="Jumpscare">
     </div>
 
-    <div class="popup" id="popup">Yeee akhirnya dimaafin!</div>
-    <div class="emoji" id="emoji">🥳</div>
+    <script>
+        function startScare() {
+            // Tampilkan container hantu
+            const jumpscare = document.getElementById('jumpscare-container');
+            const audio = document.getElementById('scream-sound');
+            
+            jumpscare.style.display = 'flex';
+            
+            // Tambahkan efek getar pada gambar
+            document.getElementById('ghost-img').classList.add('shake');
 
-    <div id="finalSection">
-      <div style="font-size: 1.2em; margin-bottom: 10px;">Jika benar klik ini</div>
-      <button id="confirmBtn" class="choice">Klik Ini</button>
+            // Putar suara (browser mewajibkan interaksi user terlebih dahulu, jadi tombol ini memicu audionya)
+            audio.play().catch(e => console.log("Audio gagal diputar:", e));
 
-      <div id="copySection">
-        <div style="font-weight: bold; color: #ff4d6d; margin: 15px 0 5px;">Maaf Ya Aku Gak Sengaja , Beneran</div>
-        <div id="copyText" style="background-color: #fff; color: #333; padding: 10px; border-radius: 10px; margin-bottom: 10px;">IYA AKU MAAFIN KAMU</div>
-        <button class="choice" onclick="copyToClipboard()">Salin Teks Ini Lalu Kirim</button>
-      </div>
-    </div>
-
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-  </div>
-
-  <script>
-    const noBtn = document.getElementById("no");
-    const yesBtn = document.getElementById("yes");
-    const choiceContainer = document.getElementById("choice-container");
-    const popup = document.getElementById("popup");
-    const emoji = document.getElementById("emoji");
-    const finalSection = document.getElementById("finalSection");
-    const confirmBtn = document.getElementById("confirmBtn");
-    const copySection = document.getElementById("copySection");
-    const clickSound = document.getElementById("clickSound");
-    const cheerSound = document.getElementById("cheerSound");
-    const dramaticMusic = document.getElementById("dramaticMusic");
-
-    let noClickCount = 0;
-    let yesClicked = false;
-
-    function playSound(sound) {
-      sound.currentTime = 0;
-      sound.play();
-    }
-
-    noBtn.addEventListener("click", () => {
-      playSound(clickSound);
-      noClickCount++;
-      if (noClickCount === 2) {
-        noBtn.style.display = "none";
-        choiceContainer.classList.add("center");
-      }
-    });
-
-    yesBtn.addEventListener("click", () => {
-      playSound(clickSound);
-      if (!yesClicked) {
-        yesBtn.textContent = "Yakin nih?";
-        yesClicked = true;
-      } else {
-        yesBtn.style.display = "none";
-        popup.style.display = "block";
-        emoji.style.display = "block";
-        playSound(cheerSound);
-        dramaticMusic.play();
-        finalSection.style.display = "block";
-
-        const particles = document.querySelectorAll('.particle');
-        particles.forEach(p => p.style.animation = 'particleAnimation 2s ease-in-out 1');
-      }
-    });
-
-    confirmBtn.addEventListener("click", () => {
-      playSound(clickSound);
-      copySection.style.display = "block";
-    });
-
-    function copyToClipboard() {
-      playSound(clickSound);
-      const text = document.getElementById("copyText").textContent;
-      navigator.clipboard.writeText(text).then(() => {
-        alert("Teks berhasil disalin, jangan lupa dikirim ya!");
-      });
-    }
-
-    function createBalloon() {
-      const containerLeft = document.getElementById('balloon-container');
-      const containerRight = document.getElementById('balloon-container-right');
-      
-      // Balon kiri
-      const balloonLeft = document.createElement('div');
-      balloonLeft.className = 'balloon';
-      balloonLeft.style.top = `${Math.random() * 90 + 20}%`;
-      balloonLeft.innerHTML = '❣️';
-      containerLeft.appendChild(balloonLeft);
-      setTimeout(() => balloonLeft.remove(), 4000);
-
-      // Balon kanan
-      const balloonRight = document.createElement('div');
-      balloonRight.className = 'balloon right';
-      balloonRight.style.top = `${Math.random() * 90 + 20}%`;
-      balloonRight.innerHTML = '❣️';
-      containerRight.appendChild(balloonRight);
-      setTimeout(() => balloonRight.remove(), 4000);
-    }
-
-    setInterval(createBalloon, 800);
-  </script>
+            // Membuat layar full screen otomatis (opsional, beberapa browser mungkin memblokir)
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            }
+        }
+    </script>
 </body>
 </html>
